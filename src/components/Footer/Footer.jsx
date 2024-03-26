@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import github from "../../image/github.png";
 import twitter from "../../image/twitter.png";
-import linkedin from "../../image/linkedin.png";
+import linkedin from "../../image/linkedIn.png";
 import Icon from "../Icon";
 
 const Footer = () => {
