@@ -12,8 +12,11 @@ import AuthLayout from "./AuthLayout"
 import PostCard from "./PostCard"
 import SignUp from './Signup'
 import Container from "./Container";
+import AiRes from "./AiRes";
+
 export {Header,
        Footer,
+       AiRes,
        RTE,
        Logo,
        LogoutBtn,

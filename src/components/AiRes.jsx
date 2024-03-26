@@ -4,7 +4,7 @@ import { Input } from "../components";
 import conf from "../conf/conf.js";
 import loading from "../image/loading.gif";
 import CopyToClipboard from "react-copy-to-clipboard";
-import copy from "../image/copy.png"
+import copy from "../image/copy.png";
 
 function AiRes() {
   const [res, setRes] = useState(null);
@@ -13,8 +13,7 @@ function AiRes() {
   const OPENAI_API_KEY = conf.openAiKey;
 
   const handleResponse = async () => {
-    setGetResponse(true); // Show loading indicator immediately
-
+    setGetResponse(true);
     try {
       const openai = new OpenAI({
         apiKey: OPENAI_API_KEY,
@@ -29,10 +28,9 @@ function AiRes() {
       setRes(completion.choices[0].message.content);
     } catch (error) {
       console.error(error);
-      // Handle errors gracefully, e.g., display an error message
     }
 
-    setGetResponse(false); // Hide loading indicator after response is received
+    setGetResponse(false);
   };
 
   return (
@@ -71,13 +69,14 @@ function AiRes() {
               </div>
               <div className="copy-button-container flex   flex-row-reverse  items-center rounded-b-xl  bg-gray-100">
                 <CopyToClipboard text={res}>
-                  <button className="copy-button flex items-center justify-center hover:bg-gray-200 text-gray-700 rounded-md p-2">
+                  <button className="copy-button flex items-center justify-center hover:bg-gray-200 text-gray-700 rounded-md p-2"
+                  onClick={(e) => e.preventDefault()}>
+                    
                     <img
                       src={copy}
                       alt="Copy to clipboard"
                       className="w-4 h-4 mr-1"
                     />
-                    
                   </button>
                 </CopyToClipboard>
               </div>

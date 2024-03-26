@@ -4,7 +4,7 @@ import { Button, Input, RTE, Select } from "./index";
 import appwriteService from "../appwrite/congif";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import AiRes from "../utility/AiRes";
+import AiRes from "./AiRes"
 export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -15,16 +15,15 @@ export default function PostForm({ post }) {
         status: post?.status || "active",
       },
     });
- 
+
   const [showElement, setShowElement] = useState(false);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  let id = (userData.$id !== undefined) ? userData.$id : userData.userData.$id;
+  let id = userData.$id !== undefined ? userData.$id : userData.userData.$id;
   const handleClick = () => {
     setShowElement(true);
   };
   const submit = async (data) => {
-    
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -43,32 +42,26 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      //console.log(data.image[0]);
-      //console.log(userData);
-      //console.log(userData.userData);
       const file = await appwriteService.uploadFile(data.image[0]);
 
       if (file) {
-     // console.log(userData);
-      //console.log("id  ",userData.userData)
         const fileId = file.$id;
         data.featuredImage = fileId;
-        try{
+        try {
           let dbPost = await appwriteService.createPost({
             ...data,
-            userid: id
+            userid: id,
           });
-  
+
           if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
           }
-        } catch(error){
-           prompt(error.message)
+        } catch (error) {
+          prompt(error.message);
         }
-      } 
+      }
     }
   };
-
 
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string")
@@ -92,7 +85,10 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap flex-col md:flex-row ">
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="flex flex-wrap flex-col md:flex-row "
+    >
       <div className=" w-full lg:w-2/3 px-2">
         <Input
           label="Title :"
@@ -147,7 +143,7 @@ export default function PostForm({ post }) {
           <div className="w-full px-2  md:w-1/2">
             <Button
               type="submit"
-              bgColor="bg-green-500" 
+              bgColor="bg-green-500"
               className="w-full "
               textColor="text-black"
               hover="hover:bg-green-600 hover:text-white"
@@ -162,9 +158,7 @@ export default function PostForm({ post }) {
           >
             Let AI help in writting post
           </button>
-          {showElement && (
-           <AiRes/>
-          )}
+          {showElement && <AiRes />}
         </div>
       </div>
     </form>
