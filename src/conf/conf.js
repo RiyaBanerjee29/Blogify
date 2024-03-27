@@ -5,7 +5,8 @@ const conf = {
     appWriteDatabaseId : String(import.meta.env.VITE_APPWRITE_DATABASEID),
     appWriteCollectionId : String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
     appWriteBucketId : String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
-    openAiKey : String(import.meta.env.VITE_OPENAI_API_KEY )
+    openAiKey : String(import.meta.env.VITE_OPENAI_API_KEY ),
+    tinyMCEKey : String(import.meta.env.VITE_TINYMCE_API_KEY)
 }
 /**kahi br aisa hota h k env variables load nhi hote h ya usko string na le ke
    eg agr id" 1234g56" hai tab toh string lega agr id"123456" hai toh js isko number 

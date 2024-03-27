@@ -1,6 +1,7 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
+import tinyMCEKey from "../conf/conf.js"
 
 export default function RTE({ name, control, label, defaultValue = "" }) {
   return (
@@ -12,7 +13,7 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
-            apiKey="y6qh2ctonablyw9ur7n4bvf6tsc981us6oqu495emiluu2sg"
+            apiKey= {tinyMCEKey}
             initialValue={defaultValue}
             init={{
               initialValue: defaultValue,
@@ -46,12 +47,7 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
             onEditorChange={onChange}
-
-            // onEditorChange is a event, Jab user editor mein kuch likhta hai ya edit karta hai, toh onEditorChange event trigger hota hai
-            // aur iske handler function (yahan onChange function) ko call kiya jata hai. Is function mein humare dwara
-            // diye gaye react-hook-form ke form state ko update karne ka logic hota hai. Is tarah se, onEditorChange event
-            //hume batata hai ki editor mein kuch badla gaya hai, aur onChange function us badlav ko handle karta hai.
-          />
+ />
         )}
       />
     </div>
